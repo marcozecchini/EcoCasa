@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EcoCasa.Views.LogInPage"
+             xmlns:toolkit="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             Title="LogIn">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:LogInViewModel x:Key="LogInViewModel"></toolkit:LogInViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    
+    <StackLayout BindingContext="{StaticResource LogInViewModel}">
+        <Label Text="Complete the fields" HorizontalOptions="Center"></Label>
+        <Entry x:Name="email" Placeholder="Email"></Entry>
+        <Entry x:Name="password" Placeholder="Passwords" IsPassword="True"></Entry>
+        <Button Text="Login" Command="{Binding GoLogInCommand}"/>    
+    </StackLayout>
+    
+</ContentPage>
