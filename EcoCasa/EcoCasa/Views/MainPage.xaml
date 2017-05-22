@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:EcoCasa"
+             xmlns:toolkit="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.MainPage"
+             Title="EcoCasa">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:MainViewModel x:Key="MainViewModel"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout BindingContext="{StaticResource MainViewModel}">
+        <Button Text="LogIn" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LogInCommand}"/>
+        <Button Text="Registration" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Command="{Binding RegistrationCommand}"></Button>
+        <Button Text="LogInWithFB" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LogInWithFB}" TextColor="White" 
+                BackgroundColor="#01579B"
+                Font="Bold"
+                FontSize="26"></Button>
+    </StackLayout>
+</ContentPage>
