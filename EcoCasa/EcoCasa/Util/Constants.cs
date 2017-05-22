@@ -1,4 +1,6 @@
-﻿namespace EcoCasa.Util
+﻿using System;
+
+namespace EcoCasa.Util
 {
     public class Constants
     {
@@ -10,10 +12,10 @@
         public static string ClientSecret = "65bd34723296d5a88c47416e374dd118";
 
         // These values do not need changing
-        public static string Scope = "";
-        public static string AuthorizeUrl = "https://m.facebook.com/dialog/oauth/";
+        public static string Scope = ""; //"public_profile+email";
+        public static Uri AuthorizeUrl = new Uri("https://m.facebook.com/dialog/oauth/");
        
         // Set this property to the location the user will be redirected too after successfully authenticating
-        public static string RedirectUrl = "http://www.facebook.com/connect/login_success.html";
+        public static Uri RedirectUrl = new Uri("http://www.facebook.com/connect/login_success.html");
     }
 }

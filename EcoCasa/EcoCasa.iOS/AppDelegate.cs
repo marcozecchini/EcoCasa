@@ -25,6 +25,12 @@ namespace EcoCasa.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            Xamarin.Auth.Presenters.OAuthLoginPresenter.PlatformLogin = (authenticator) =>
+            {
+                var oAuthLogin = new OAuthLoginPresenter();
+                oAuthLogin.Login(authenticator);
+            };
+
             return base.FinishedLaunching(app, options);
         }
     }

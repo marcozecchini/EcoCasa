@@ -21,6 +21,7 @@ namespace EcoCasa.Util
             nav.Configure(Locator.MainPage, typeof(MainPage));
             nav.Configure(Locator.LogInPage, typeof(LogInPage));
             nav.Configure(Locator.RegistrationPage,typeof(RegistrationPage));
+            nav.Configure(Locator.LogFbPage, typeof(LogFbPage));
 
             //Singleton di NavigationService
             SimpleIoc.Default.Register(() => nav);
@@ -29,10 +30,12 @@ namespace EcoCasa.Util
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LogInViewModel>();
             SimpleIoc.Default.Register<RegistrationViewModel>();
+            SimpleIoc.Default.Register<FacebookViewModel>();
         }
         //Add each view's name here.
         public const string MainPage = "MainPage";
         public const string LogInPage = "LogInPage";
+        public const string LogFbPage = "LogFbPage";
         public const string RegistrationPage = "RegistrationPage";
         
         public MainViewModel Main
@@ -48,6 +51,14 @@ namespace EcoCasa.Util
             get
             {
                 return ServiceLocator.Current.GetInstance<LogInViewModel>();
+            }
+        }
+
+        public FacebookViewModel Facebook
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<FacebookViewModel>();
             }
         }
 

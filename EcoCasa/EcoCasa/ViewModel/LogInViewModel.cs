@@ -9,9 +9,14 @@ namespace EcoCasa.ViewModel
     {
         public LogInViewModel()
         {
-            //GoLogInCommand = new Command(()=>true);
+            GoLogInCommand = new Command(()=> ValidateLogIn());
         }
 
         public ICommand GoLogInCommand { private set; get; }
+
+        public void ValidateLogIn()
+        {
+            
+        }
     }
 }
