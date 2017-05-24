@@ -16,7 +16,7 @@ namespace EcoCasa.Views
             var apiRequest =
                 "https://www.facebook.com/dialog/oauth?client_id="
                 + Constants.ClientId
-                + "&display=popup&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html";
+                + "&display=popup&scope=email&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html";
 
             var webView = new WebView
             {
@@ -36,11 +36,13 @@ namespace EcoCasa.Views
 
             if (accessToken != "")
             {
-                var vm = BindingContext as FacebookViewModel;
+                var vm = new FacebookViewModel();
 
-                await vm.SetFacebookUserProfileAsync(accessToken);
+                var task = await vm.SetFacebookUserProfileAsync(accessToken);
+                //task.Wait();
+                
+                //Navigate to con task.result che è un user
 
-                Content = MainStackLayout;
             }
         }
 
@@ -49,12 +51,7 @@ namespace EcoCasa.Views
             if (url.Contains("access_token") && url.Contains("&expires_in="))
             {
                 var at = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "");
-
-                if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
-                {
-                    at = url.Replace("http://www.facebook.com/connect/login_success.html#access_token=", "");
-                }
-
+                
                 var accessToken = at.Remove(at.IndexOf("&expires_in="));
 
                 return accessToken;

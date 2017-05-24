@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.ShowUserPage"
+             Title="User">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ShowUserViewModel x:Key="ShowUserViewModel"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BindingContext="{StaticResource ShowUserViewModel}">
+        <Label Text="{Binding User.Name}"></Label>    
+    </StackLayout>
+</ContentPage>

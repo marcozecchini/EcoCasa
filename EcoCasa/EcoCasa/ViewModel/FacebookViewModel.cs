@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using EcoCasa.Models;
@@ -9,23 +10,25 @@ namespace EcoCasa.ViewModel
     public class FacebookViewModel : INotifyPropertyChanged
     {
 
-        private FacebookProfile _facebookProfile;
+        private User _user;
 
-        public FacebookProfile FacebookProfile
+        public User User
         {
-            get { return _facebookProfile; }
+            get { return _user; }
             set
             {
-                _facebookProfile = value;
+                _user = value;
                 OnPropertyChanged();
             }
         }
 
-        public async Task SetFacebookUserProfileAsync(string accessToken)
+        public async Task<User> SetFacebookUserProfileAsync(string accessToken)
         {
             var facebookServices = new FacebookServices();
 
-            FacebookProfile = await facebookServices.GetFacebookProfileAsync(accessToken);
+            var User =  await facebookServices.GetFacebookProfileAsync(accessToken);
+          
+            return User;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
