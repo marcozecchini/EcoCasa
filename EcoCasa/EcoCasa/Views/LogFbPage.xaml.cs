@@ -38,9 +38,8 @@ namespace EcoCasa.Views
             {
                 var vm = new FacebookViewModel();
 
-                var task = await vm.SetFacebookUserProfileAsync(accessToken);
-                //task.Wait();
-                
+                var user = await vm.SetFacebookUserProfileAsync(accessToken);
+                //TODO Navigation to showuserprofile
                 //Navigate to con task.result che è un user
 
             }

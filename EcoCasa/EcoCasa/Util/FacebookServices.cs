@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using EcoCasa.Models;
+using EcoCasa.Util;
 using Newtonsoft.Json;
 
 namespace FacebookLogin.Util
@@ -15,11 +16,11 @@ namespace FacebookLogin.Util
                 + accessToken;
 
             var httpClient = new HttpClient();
-
+           
             var userJson = await httpClient.GetStringAsync(requestUrl);
-
+            
             var facebookProfile = JsonConvert.DeserializeObject<User>(userJson);
-
+            
             return facebookProfile;
         }
     }

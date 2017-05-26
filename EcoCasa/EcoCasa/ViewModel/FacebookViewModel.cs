@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using EcoCasa.Models;
+using EcoCasa.Util;
 using FacebookLogin.Util;
 
 namespace EcoCasa.ViewModel
@@ -27,7 +27,12 @@ namespace EcoCasa.ViewModel
             var facebookServices = new FacebookServices();
 
             var User =  await facebookServices.GetFacebookProfileAsync(accessToken);
-          
+
+            if (!await FirebaseUtil.HasUser(""))
+            {
+                var postRes = await FirebaseUtil.PostUser(User);
+                //XMLUtil.SaveUserCode(postRes);
+            }
             return User;
         }
 
