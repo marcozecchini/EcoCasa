@@ -2,5 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcoCasa.Views.RegistrationPage"
+             xmlns:toolkit="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
              Title="Registration">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:RegistrationViewModel x:Key="RegistrationViewModel"></toolkit:RegistrationViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout BindingContext="{StaticResource RegistrationViewModel}">
+        <Label Text="Account registration. Complete the fields below:"></Label>
+        <Label Text="First Name"></Label>
+        <Entry x:Name="FirstName"  Text="{Binding FirstName}"></Entry>
+        <Label Text="Last Name"></Label>
+        <Entry x:Name="LastName" Text="{Binding LastName}"></Entry>
+        <Label Text="Email"></Label>
+        <Entry x:Name="Email" Keyboard="Email" Text="{Binding Email}"></Entry>
+        <Label Text="Confirm Email"></Label>
+        <Entry x:Name="ConfirmMail" Keyboard="Email" Text="{Binding ConfirmEmail}"></Entry>
+        <Label Text="Password"></Label>
+        <Entry x:Name="Password" IsPassword="True" Text="{Binding Password}"></Entry>
+        <Label Text="Confirm Password"></Label>
+        <Entry x:Name="ConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}"></Entry>
+        <Button x:Name="SendButton" Text="Send" Command="{Binding SendCommand}"></Button>
+    </StackLayout>
+    
 </ContentPage>

@@ -7,7 +7,8 @@ namespace EcoCasa.Models
         [JsonProperty("Name")]
         public string Name { get; set; }
         public Picture Picture { get; set; }
-        private string Password { get; set; }
+        [JsonProperty("Password")]
+        public string Password { get; set; }
         [JsonProperty("Email")]
         public string Email { get; set; }
         public string Telefono { get; set; }

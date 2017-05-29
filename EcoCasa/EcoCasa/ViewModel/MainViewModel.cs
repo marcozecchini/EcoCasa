@@ -14,7 +14,7 @@ namespace EcoCasa.ViewModel
         {
             LogInCommand = new Command( ()=> App.Locator.NavigationService.NavigateTo(Locator.LogInPage) );
             RegistrationCommand = new Command(()=> App.Locator.NavigationService.NavigateTo(Locator.RegistrationPage));
-            LogInWithFB = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.LogFbPage));
+            LogInWithFB = new Command( () => App.Locator.NavigationService.NavigateTo(Locator.LogFbPage));
         }
 
         

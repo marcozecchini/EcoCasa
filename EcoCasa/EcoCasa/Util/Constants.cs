@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using EcoCasa.Models;
 
 namespace EcoCasa.Util
 {
@@ -18,7 +20,14 @@ namespace EcoCasa.Util
         // Set this property to the location the user will be redirected too after successfully authenticating
         public static Uri RedirectUrl = new Uri("http://www.facebook.com/connect/login_success.html");
 
-        //public User Data 
+        //public User DataCode 
         public static String Code;
+        //public User Data
+        public static User User;
+
+        //key for encrypting
+        public static String pass = "pinac&343931\"lshvob/yuihbFVEI_i(B2BCB78(cNVIOEM";
+        //salt for encrypting
+        public static byte[] salt = Cryptor.CreateSalt(16);
     }
 }

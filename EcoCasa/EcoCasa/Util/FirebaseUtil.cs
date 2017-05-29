@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using EcoCasa.Models;
 using Newtonsoft.Json;
@@ -31,9 +32,30 @@ namespace EcoCasa.Util
             if (JSON == null) return null;
             foreach (var juser in JSON)
             {
-                if (user.Email.Equals(juser.Value["Email"].Value<String>()) && user.Name.Equals(juser.Value["Name"].Value<String>())) return juser.Key;
+                if (user.Email.Equals(juser.Value["Email"].Value<String>())) return juser.Key;
             }
             
+            return null;
+
+        }
+
+        public static async Task<String> GetUserCodeWithPassword(User user)
+        {
+            JObject JSON = await GetUserDB();
+            
+            if (JSON == null) return null;
+            foreach (var juser in JSON)
+            {
+                try
+                {
+                    var decr = Cryptor.DecryptAes(Convert.FromBase64String(juser.Value["Password"].Value<string>()), Constants.pass, Constants.salt);
+                    juser.Value["Password"].Value<string>();
+                    if (user.Email.Equals(juser.Value["Email"].Value<String>()) &&
+                        user.Password.Equals(decr)) return juser.Key;
+                } catch { }
+                
+            }
+
             return null;
 
         }

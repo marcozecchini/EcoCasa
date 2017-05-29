@@ -1,4 +1,5 @@
-﻿using EcoCasa.Util;
+﻿using System.Threading.Tasks;
+using EcoCasa.Util;
 using EcoCasa.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,10 +10,15 @@ namespace EcoCasa.Views
     public partial class LogFbPage : ContentPage
     {
         
-        public LogFbPage()
+        public  LogFbPage()
         {
             InitializeComponent();
+            DoLog();
+            
+        }
 
+        private async void DoLog()
+        {
             var apiRequest =
                 "https://www.facebook.com/dialog/oauth?client_id="
                 + Constants.ClientId
@@ -25,7 +31,7 @@ namespace EcoCasa.Views
             };
 
             webView.Navigated += WebViewOnNavigated;
-
+            
             Content = webView;
         }
 

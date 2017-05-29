@@ -13,8 +13,8 @@
     
     <StackLayout BindingContext="{StaticResource LogInViewModel}">
         <Label Text="Complete the fields" HorizontalOptions="Center"></Label>
-        <Entry x:Name="email" Placeholder="Email"></Entry>
-        <Entry x:Name="password" Placeholder="Passwords" IsPassword="True"></Entry>
+        <Entry x:Name="email" Placeholder="Email" Text="{Binding Email}"></Entry>
+        <Entry x:Name="password" Placeholder="Passwords" IsPassword="True" Text="{Binding Password}"></Entry>
         <Button Text="Login" Command="{Binding GoLogInCommand}"/>    
     </StackLayout>
     

@@ -17,6 +17,7 @@ namespace EcoCasa
         
             var firstPage = new NavigationPage(new MainPage());
             Locator.NavigationService.Initialize(firstPage);
+            Locator.DialogService.Initialize(firstPage);
             MainPage = firstPage;
             
 

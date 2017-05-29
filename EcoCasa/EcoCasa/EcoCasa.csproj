@@ -41,6 +41,8 @@
     <Compile Include="Models\FacebookProfile.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Util\Cryptor.cs" />
+    <Compile Include="Util\DialogService.cs" />
     <Compile Include="Util\FacebookServices.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\FirebaseUtil.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="ViewModel\FacebookViewModel.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="Views\LogFbPage.xaml.cs">
       <DependentUpon>LogFbPage.xaml</DependentUpon>
@@ -63,6 +66,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UserXML.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
