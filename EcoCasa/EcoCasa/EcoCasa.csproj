@@ -41,14 +41,14 @@
     <Compile Include="Models\FacebookProfile.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Util\DataManagement.cs" />
     <Compile Include="Util\FacebookServices.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\FirebaseUtil.cs" />
     <Compile Include="Util\LocalDataSave.cs" />
     <Compile Include="Util\Locator.cs" />
     <Compile Include="Util\NavigationService.cs" />
-    <Compile Include="Util\XMLUtil.cs" />
+    <Compile Include="Util\XML\ISaveAndLoad.cs" />
+    <Compile Include="Util\XML\XMLUtil.cs" />
     <Compile Include="ViewModel\FacebookViewModel.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -17,5 +17,8 @@ namespace EcoCasa.Util
        
         // Set this property to the location the user will be redirected too after successfully authenticating
         public static Uri RedirectUrl = new Uri("http://www.facebook.com/connect/login_success.html");
+
+        //public User Data 
+        public static String Code;
     }
 }
