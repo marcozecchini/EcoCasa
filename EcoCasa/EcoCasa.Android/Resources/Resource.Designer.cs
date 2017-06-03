@@ -29,6 +29,8 @@ namespace EcoCasa.Droid
 			global::Auth0.SDK.Resource.String.library_name = global::EcoCasa.Droid.Resource.String.library_name;
 			global::PCLCrypto.Resource.String.ApplicationName = global::EcoCasa.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::EcoCasa.Droid.Resource.String.Hello;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::EcoCasa.Droid.Resource.String.ApplicationName;
+			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::EcoCasa.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::EcoCasa.Droid.Resource.Attribute.actionBarSize;
 		}
 		

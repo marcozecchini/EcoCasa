@@ -5,7 +5,7 @@ namespace EcoCasa.Models
     public class FacebookProfile
     {
         public string Name { get; set; }
-        public Picture Picture { get; set; }
+        //public Picture Picture { get; set; }
         public string Locale { get; set; }
         public string Link { get; set; }
         public Cover Cover { get; set; }

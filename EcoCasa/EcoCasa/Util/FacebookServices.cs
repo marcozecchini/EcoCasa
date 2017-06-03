@@ -9,7 +9,7 @@ namespace FacebookLogin.Util
     public class FacebookServices
     {
 
-        public async Task<User> GetFacebookProfileAsync(string accessToken)
+        public async Task<SessionUser> GetFacebookProfileAsync(string accessToken)
         {
             var requestUrl =
                 "https://graph.facebook.com/me?fields=name,email&access_token="
@@ -19,7 +19,7 @@ namespace FacebookLogin.Util
            
             var userJson = await httpClient.GetStringAsync(requestUrl);
             
-            var facebookProfile = JsonConvert.DeserializeObject<User>(userJson);
+            var facebookProfile = JsonConvert.DeserializeObject<SessionUser>(userJson);
             
             return facebookProfile;
         }

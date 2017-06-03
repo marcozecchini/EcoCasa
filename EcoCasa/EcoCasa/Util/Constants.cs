@@ -23,10 +23,10 @@ namespace EcoCasa.Util
         //public User DataCode 
         public static String Code;
         //public User Data
-        public static User User;
+        public static SessionUser User;
 
         //key for encrypting
-        public static String pass = "pinac&343931\"lshvob/yuihbFVEI_i(B2BCB78(cNVIOEM";
+        public static String pass = "pin(C&3F.931\"lsh";
         //salt for encrypting
         public static byte[] salt = Cryptor.CreateSalt(16);
     }

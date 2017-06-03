@@ -36,7 +36,7 @@ namespace EcoCasa.ViewModel
 
         private async Task<bool> ValidateRegistration()
         {
-            User User = new User();
+            SessionUser User = new SessionUser();
             User.Name = FirstName + " " + LastName;
             if (FirstName == null || LastName == null || Email == null || ConfirmEmail == null || Password == null ||
                 ConfirmPassword == null)
@@ -50,17 +50,19 @@ namespace EcoCasa.ViewModel
                 if (Password.Equals(ConfirmPassword))
                 {
                     User.Email = Email;
-                    if (await FirebaseUtil.HasUser(await FirebaseUtil.GetUserCode(User)))
+                    if (await FirebaseUtil.HasUser(await FirebaseUtil.GetSessionUserCode(User)))
                     {
                         await App.Locator.DialogService.ShowMessageBox(
                             "Email already present in the database", "Something wrong");
                         return false;
                     }
                     //Encrypting password
-                    User.Password = Cryptor.EncryptAes(Password, Constants.pass, Constants.salt);
+                    User.Password = Password; //Cryptor.EncryptAes(Password, Constants.pass, Constants.salt);
 
                     Constants.Code = await FirebaseUtil.PostUser(User);
                     Constants.User = User;
+                    App.Database.SaveSessionUser(Constants.User);
+
                     return true;
 
                 }

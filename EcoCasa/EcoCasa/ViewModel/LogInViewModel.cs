@@ -42,12 +42,14 @@ namespace EcoCasa.ViewModel
             var code = await FirebaseUtil.GetUserCodeWithPassword(temp_user);
             if (code != null)
             {
-                Constants.User = await FirebaseUtil.GetUserDate(code);
+                Constants.User = (SessionUser)await FirebaseUtil.GetUserDate(code);
+                App.Database.SaveSessionUser(Constants.User);
+                Constants.Code = code;
                 return true;
             }
             else
             {
-                await App.Locator.DialogService.ShowMessageBox("The asked user isn't in the database", "Error");
+                await App.Locator.DialogService.ShowMessageBox("The asked user isn't in the database", "Attention");
                 return false;
             }
         }

@@ -46,7 +46,7 @@ namespace EcoCasa.Util
 
             ISymmetricKeyAlgorithmProvider aes = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
             ICryptographicKey symetricKey = aes.CreateSymmetricKey(key);
-            var bytes = WinRTCrypto.CryptographicEngine.Encrypt(symetricKey, Encoding.UTF8.GetBytes(data));
+            var bytes = WinRTCrypto.CryptographicEngine.Encrypt(symetricKey, Convert.FromBase64String(data));
             return Convert.ToBase64String(bytes);
 
         }
@@ -64,7 +64,7 @@ namespace EcoCasa.Util
             ISymmetricKeyAlgorithmProvider aes = WinRTCrypto.SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithm.AesCbcPkcs7);
             ICryptographicKey symetricKey = aes.CreateSymmetricKey(key);
             var bytes = WinRTCrypto.CryptographicEngine.Decrypt(symetricKey, data);
-            return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            return Convert.ToBase64String(bytes);
         }
 
     }

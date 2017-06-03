@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using EcoCasa.Models;
 using EcoCasa.Util;
 using EcoCasa.ViewModel;
 using Xamarin.Forms;
@@ -44,9 +45,8 @@ namespace EcoCasa.Views
             {
                 var vm = new FacebookViewModel();
 
-                var user = await vm.SetFacebookUserProfileAsync(accessToken);
-                //TODO Navigation to showuserprofile
-                //Navigate to con task.result che è un user
+                Constants.User = (SessionUser)await vm.SetFacebookUserProfileAsync(accessToken);
+                App.Locator.NavigationService.SetNewRoot(Locator.ProfilePage);
 
             }
         }

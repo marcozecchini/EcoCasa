@@ -26,6 +26,19 @@ namespace EcoCasa.Util
             return JSON;
         }
 
+        public static async Task<String> GetSessionUserCode(SessionUser user)
+        {
+            JObject JSON = await GetUserDB();
+            if (JSON == null) return null;
+            foreach (var juser in JSON)
+            {
+                if (user.Email.Equals(juser.Value["Email"].Value<String>())) return juser.Key;
+            }
+
+            return null;
+
+        }
+
         public static async Task<String> GetUserCode(User user)
         {
             JObject JSON = await GetUserDB();
@@ -48,10 +61,10 @@ namespace EcoCasa.Util
             {
                 try
                 {
-                    var decr = Cryptor.DecryptAes(Convert.FromBase64String(juser.Value["Password"].Value<string>()), Constants.pass, Constants.salt);
-                    juser.Value["Password"].Value<string>();
+                    var json_string = juser.Value["Password"].Value<string>();
+                    //var decrypted = Cryptor.DecryptAes(Convert.FromBase64String(json_string), Constants.pass, Constants.salt);
                     if (user.Email.Equals(juser.Value["Email"].Value<String>()) &&
-                        user.Password.Equals(decr)) return juser.Key;
+                        user.Password.Equals(json_string)) return juser.Key;
                 } catch { }
                 
             }
@@ -82,6 +95,7 @@ namespace EcoCasa.Util
         public static async Task<String> PostUser(User user)
         {
             var req = DB_URL + "/User.json?auth=" + AUTH_TOKEN;
+            JsonConvert.SerializeObject(user);
             var content = new StringContent(JsonConvert.SerializeObject(user));
             var httpClient = new HttpClient();
 
@@ -90,6 +104,8 @@ namespace EcoCasa.Util
             var resultData = exctractCode(responseData);
             return resultData;
         }
+
+       
 
         private static string exctractCode(String response)
         {

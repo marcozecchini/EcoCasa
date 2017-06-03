@@ -11,5 +11,18 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    
+    <StackLayout BindingContext="{StaticResource ProfileViewModel}">
+        <Label Text="{Binding Name}"></Label>
+        <Label Text="{Binding Email}"></Label>
+        
+        <ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Casa}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        <Button Text="Logout" Command="{Binding LogOutCommand}"></Button>
+    </StackLayout>
 </ContentPage>
