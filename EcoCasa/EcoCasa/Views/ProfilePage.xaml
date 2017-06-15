@@ -2,27 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             xmlns:behavior="clr-namespace:EcoCasa.Util;assembly=EcoCasa"
              x:Class="EcoCasa.Views.ProfilePage"
              Title="User Profile">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <viewModel:ProfileViewModel x:Key="ProfileViewModel"></viewModel:ProfileViewModel>
+            <behavior:ProfileBehavior x:Key="ProfileBehavior" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <StackLayout BindingContext="{StaticResource ProfileViewModel}">
-        <Label Text="{Binding Name}"></Label>
+        <Label Text="{Binding Nome}"></Label>
         <Label Text="{Binding Email}"></Label>
-        
-        <ListView>
+
+        <ListView SeparatorVisibility="Default" ItemsSource="{ Binding Casa}" ItemSelected="ListView_OnItemSelected" >
+<!--            <ListView.Behaviors>-->
+<!--                <behavior:ProfileBehavior></behavior:ProfileBehavior>-->
+<!--            </ListView.Behaviors>-->
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Casa}" />
+<!--                    <Button Text="{Binding Name}" Command="{Binding SetCasa, Source={StaticResource ProfileViewModel} }" CommandParameter="{Binding Name}"></Button>-->
+<!--                    <ViewCell>-->
+<!--                        <StackLayout>-->
+<!--                            <Label Text="{Binding Name}" ></Label>-->
+<!--                            <Button Text="Go" Command="{Binding SetCasa, Source={x:Reference ProfileViewModel}}" CommandParameter="{Binding Name}"></Button>-->
+<!--                        </StackLayout>-->
+<!--                    </ViewCell>-->
+                    <TextCell Text="{Binding Name}" Detail="{Binding Address}"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         
+<!--        <Button Text="Visit selected SmartCasa" Command="{Binding SetCasa}"></Button>-->
+        <Button Text="Add new SmartCasa" Command="{Binding CreateSmartCasaCommand}"></Button>
         <Button Text="Logout" Command="{Binding LogOutCommand}"></Button>
     </StackLayout>
 </ContentPage>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.SmartCasaPage"
+             Title="SmartCasa's profile">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:SmartCasaViewModel x:Key="SmartCasaViewModel"></viewModel:SmartCasaViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BindingContext="{StaticResource SmartCasaViewModel}">
+        <Label Text="{Binding Casa.Name}"></Label>
+        <Label Text="{Binding Casa.Address}"></Label>
+    </StackLayout>
+</ContentPage>

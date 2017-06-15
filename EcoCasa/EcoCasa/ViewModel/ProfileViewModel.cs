@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using EcoCasa.DB;
 using EcoCasa.Models;
@@ -13,8 +16,10 @@ namespace EcoCasa.ViewModel
         public ProfileViewModel()
         {
             Email = Constants.User.Email;
-            Name = Constants.User.Name;
-            Casa = App.Database.GetCasas();
+            Nome = Constants.User.Name;
+            Casa = new ObservableCollection<SmartCasa>();
+            CasaEnumerator = App.Database.GetCasas(Constants.User);
+            foreach (var c in CasaEnumerator) Casa.Add(c);
 
             LogOutCommand = new Command(() =>
             {
@@ -23,12 +28,31 @@ namespace EcoCasa.ViewModel
                 Constants.Code = "";
                 App.Locator.NavigationService.SetNewRoot(Locator.MainPage);
             });
-        }
 
-        public string Name { get; set; }
+            CreateSmartCasaCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.CreateSmartCasaPage));
+            SetCasa = new Command( () =>
+            {
+                //Constants.CurrentCasa.Name = (string)name;
+                App.Locator.NavigationService.NavigateTo(Locator.SmartCasaPage);
+
+            });
+            ViewCasaCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.SmartCasaPage));
+            
+        }
+        
+
+        public string Nome { get; set; }
         public string Email { get; set; }
-        public List<SmartCasa> Casa { get; set; }
+        public List<SmartCasa> CasaEnumerator { get; set; }
+        public ObservableCollection<SmartCasa> Casa { get; set; }
+        
 
         public ICommand LogOutCommand { private set; get; }
+        public ICommand CreateSmartCasaCommand { private set; get; }
+        public ICommand ViewCasaCommand { private set; get; }
+        public ICommand SetCasa { set; get; }
+        
     }
+
+    
 }

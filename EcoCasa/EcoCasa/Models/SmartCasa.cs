@@ -18,7 +18,7 @@ namespace EcoCasa.Models
         public string Address { get; set; }
 
         //Associations
-        [JsonProperty("Administrator")]
+        [JsonProperty("Ad_Email")]
         public string Administrator { get; set; }
         
         [JsonProperty("CodeUsers"), Column("UserEmail")]

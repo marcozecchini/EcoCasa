@@ -23,6 +23,8 @@ namespace EcoCasa.Util
             nav.Configure(Locator.RegistrationPage,typeof(RegistrationPage));
             nav.Configure(Locator.LogFbPage, typeof(LogFbPage));
             nav.Configure(Locator.ProfilePage,typeof(ProfilePage));
+            nav.Configure(Locator.CreateSmartCasaPage, typeof(CreateSmartCasaPage));
+            nav.Configure(Locator.SmartCasaPage, typeof(SmartCasaPage));
 
             //Singleton di NavigationService
             SimpleIoc.Default.Register(() => nav);
@@ -33,6 +35,8 @@ namespace EcoCasa.Util
             SimpleIoc.Default.Register<RegistrationViewModel>();
             SimpleIoc.Default.Register<FacebookViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>();
+            SimpleIoc.Default.Register<CreateSmartCasaViewModel>();
+            SimpleIoc.Default.Register<SmartCasaViewModel>();
 
             //DialogService
             var dialog = new DialogService();
@@ -44,6 +48,8 @@ namespace EcoCasa.Util
         public const string LogFbPage = "LogFbPage";
         public const string RegistrationPage = "RegistrationPage";
         public const string ProfilePage = "ProfilePage";
+        public const string CreateSmartCasaPage = "CreateSmartCasaPage";
+        public const string SmartCasaPage = "SmartCasaPage";
         
         public MainViewModel Main
         {
@@ -82,6 +88,16 @@ namespace EcoCasa.Util
             get { return ServiceLocator.Current.GetInstance<ProfileViewModel>(); }
         }
 
+        public CreateSmartCasaViewModel CreateSmartCasa
+        {
+            get { return ServiceLocator.Current.GetInstance<CreateSmartCasaViewModel>(); }
+        }
+
+        public SmartCasaViewModel SmartCasa
+        {
+            get { return ServiceLocator.Current.GetInstance<SmartCasaViewModel>(); }
+        }
+        
         public NavigationService NavigationService
         {
             get { return SimpleIoc.Default.GetInstance<NavigationService>(); }

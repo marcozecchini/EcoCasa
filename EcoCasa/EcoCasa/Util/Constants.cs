@@ -29,5 +29,8 @@ namespace EcoCasa.Util
         public static String pass = "pin(C&3F.931\"lsh";
         //salt for encrypting
         public static byte[] salt = Cryptor.CreateSalt(16);
+
+        //SmartCasa to visualize
+        public static SmartCasa CurrentCasa;
     }
 }

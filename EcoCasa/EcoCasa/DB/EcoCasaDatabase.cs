@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using EcoCasa.Models;
 using SQLite;
@@ -15,7 +16,7 @@ namespace EcoCasa.DB
         {
             database = new SQLiteConnection(dbPath);
             database.CreateTable<User>();
-            database.CreateTable<Address>();
+//            database.CreateTable<Address>();
             database.CreateTable<SmartCasa>();
         }
 
@@ -52,9 +53,9 @@ namespace EcoCasa.DB
             return database.Table<SmartCasa>().FirstOrDefault(i => i.Id == id);
         }
 
-        public List<SmartCasa> GetCasas()
+        public List<SmartCasa> GetCasas(User user)
         {
-            return database.Query<SmartCasa>("select * from [SmartCasa], [User] where [Email]==[UserEmail]");
+            return database.Table<SmartCasa>().Where(casa => casa.Administrator.Equals(user.Email)).ToList();
         }
 
         public int SaveUserAsync(User User)

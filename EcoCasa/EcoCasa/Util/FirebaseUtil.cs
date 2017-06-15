@@ -26,6 +26,18 @@ namespace EcoCasa.Util
             return JSON;
         }
 
+        public static async Task<JObject> GetSmartCasaDB()
+        {
+            var req = DB_URL + "/SmartCasa.json?auth=" + AUTH_TOKEN;
+            var httpClient = new HttpClient();
+            JObject JSON = null;
+
+            var DBJson = await httpClient.GetStringAsync(req);
+            if (!DBJson.Equals("null")) JSON = JObject.Parse(DBJson);
+
+            return JSON;
+        }
+
         public static async Task<String> GetSessionUserCode(SessionUser user)
         {
             JObject JSON = await GetUserDB();
@@ -51,6 +63,20 @@ namespace EcoCasa.Util
             return null;
 
         }
+
+        public static async Task<string> GetSmartCasaCode(SmartCasa casa)
+        {
+            JObject JSON = await GetSmartCasaDB();
+            if (JSON == null) return null;
+            foreach (var juser in JSON)
+            {
+                if (casa.Address.Equals(juser.Value["Address"].Value<String>()) && casa.Administrator.Equals(juser.Value["Ad_Email"].Value<string>())) return juser.Key;
+            }
+
+            return null;
+        }
+
+        
 
         public static async Task<String> GetUserCodeWithPassword(User user)
         {
@@ -84,11 +110,30 @@ namespace EcoCasa.Util
             return User;
         }
 
+        public static async Task<SmartCasa> GetSmartCasaDate(string id)
+        {
+            var req = DB_URL + "/SmartCasa.json?auth=" + AUTH_TOKEN + "&orderBy=\"$key\"&startAt=\"" + id + "\"&endAt=\"" + id + "\"";
+            var httpClient = new HttpClient();
+
+            var DBJson = await httpClient.GetStringAsync(req);
+            var casa = JsonConvert.DeserializeObject<SmartCasa>(DBJson);
+
+            return casa;
+        }
+
         public static async Task<bool> HasUser(String id)
         {
             var user = await GetUserDate(id);
             
             if (user.Email == null) return false;
+            return true;
+        }
+
+        public static async Task<bool> HasSmartCasa(String id)
+        {
+            var casa = await GetSmartCasaDate(id);
+
+            if (casa.Address == null || casa.Administrator == null) return false;
             return true;
         }
 
@@ -105,7 +150,20 @@ namespace EcoCasa.Util
             return resultData;
         }
 
-       
+        public static async Task<String> PostSmartCasa(SmartCasa casa)
+        {
+            var req = DB_URL + "/SmartCasa.json?auth=" + AUTH_TOKEN;
+            JsonConvert.SerializeObject(casa);
+            var content = new StringContent(JsonConvert.SerializeObject(casa));
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PostAsync(req, content);
+            var responseData = httpResponse.Content.ReadAsStringAsync().Result;
+            var resultData = exctractCode(responseData);
+            return resultData;
+        }
+
+
 
         private static string exctractCode(String response)
         {
