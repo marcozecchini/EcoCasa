@@ -36,7 +36,8 @@ namespace EcoCasa.ViewModel
                 App.Locator.NavigationService.NavigateTo(Locator.SmartCasaPage);
 
             });
-            ViewCasaCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.SmartCasaPage));
+
+            Contacts = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.ContactsPage));
             
         }
         
@@ -49,7 +50,7 @@ namespace EcoCasa.ViewModel
 
         public ICommand LogOutCommand { private set; get; }
         public ICommand CreateSmartCasaCommand { private set; get; }
-        public ICommand ViewCasaCommand { private set; get; }
+        public ICommand Contacts { private set; get; }
         public ICommand SetCasa { set; get; }
         
     }

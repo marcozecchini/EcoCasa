@@ -17,25 +17,15 @@
         <Label Text="{Binding Nome}"></Label>
         <Label Text="{Binding Email}"></Label>
 
-        <ListView SeparatorVisibility="Default" ItemsSource="{ Binding Casa}" ItemSelected="ListView_OnItemSelected" >
-<!--            <ListView.Behaviors>-->
-<!--                <behavior:ProfileBehavior></behavior:ProfileBehavior>-->
-<!--            </ListView.Behaviors>-->
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Casa}" ItemSelected="ListView_OnItemSelected" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-<!--                    <Button Text="{Binding Name}" Command="{Binding SetCasa, Source={StaticResource ProfileViewModel} }" CommandParameter="{Binding Name}"></Button>-->
-<!--                    <ViewCell>-->
-<!--                        <StackLayout>-->
-<!--                            <Label Text="{Binding Name}" ></Label>-->
-<!--                            <Button Text="Go" Command="{Binding SetCasa, Source={x:Reference ProfileViewModel}}" CommandParameter="{Binding Name}"></Button>-->
-<!--                        </StackLayout>-->
-<!--                    </ViewCell>-->
                     <TextCell Text="{Binding Name}" Detail="{Binding Address}"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         
-<!--        <Button Text="Visit selected SmartCasa" Command="{Binding SetCasa}"></Button>-->
+        <Button Text="Contacts" Command="{Binding Contacts}"></Button>
         <Button Text="Add new SmartCasa" Command="{Binding CreateSmartCasaCommand}"></Button>
         <Button Text="Logout" Command="{Binding LogOutCommand}"></Button>
     </StackLayout>

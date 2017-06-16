@@ -53,6 +53,7 @@
     <Compile Include="Util\Locator.cs" />
     <Compile Include="Util\NavigationService.cs" />
     <Compile Include="Util\ProfileBehavior.cs" />
+    <Compile Include="ViewModel\ContactsViewModel.cs" />
     <Compile Include="ViewModel\CreateSmartCasaViewModel.cs" />
     <Compile Include="ViewModel\FacebookViewModel.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
@@ -60,6 +61,9 @@
     <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\SmartCasaViewModel.cs" />
+    <Compile Include="Views\ContactsPage.xaml.cs">
+      <DependentUpon>ContactsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateSmartCasaPage.xaml.cs">
       <DependentUpon>CreateSmartCasaPage.xaml</DependentUpon>
     </Compile>
@@ -191,6 +195,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\SmartCasaPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ContactsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

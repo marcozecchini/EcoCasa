@@ -25,6 +25,7 @@ namespace EcoCasa.Util
             nav.Configure(Locator.ProfilePage,typeof(ProfilePage));
             nav.Configure(Locator.CreateSmartCasaPage, typeof(CreateSmartCasaPage));
             nav.Configure(Locator.SmartCasaPage, typeof(SmartCasaPage));
+            nav.Configure(Locator.ContactsPage, typeof(ContactsPage));
 
             //Singleton di NavigationService
             SimpleIoc.Default.Register(() => nav);
@@ -37,6 +38,7 @@ namespace EcoCasa.Util
             SimpleIoc.Default.Register<ProfileViewModel>();
             SimpleIoc.Default.Register<CreateSmartCasaViewModel>();
             SimpleIoc.Default.Register<SmartCasaViewModel>();
+            SimpleIoc.Default.Register<ContactsViewModel>();
 
             //DialogService
             var dialog = new DialogService();
@@ -50,6 +52,7 @@ namespace EcoCasa.Util
         public const string ProfilePage = "ProfilePage";
         public const string CreateSmartCasaPage = "CreateSmartCasaPage";
         public const string SmartCasaPage = "SmartCasaPage";
+        public const string ContactsPage = "ContactsPage";
         
         public MainViewModel Main
         {
@@ -96,6 +99,11 @@ namespace EcoCasa.Util
         public SmartCasaViewModel SmartCasa
         {
             get { return ServiceLocator.Current.GetInstance<SmartCasaViewModel>(); }
+        }
+
+        public ContactsViewModel Contacts
+        {
+            get { return ServiceLocator.Current.GetInstance<ContactsViewModel>();  }
         }
         
         public NavigationService NavigationService

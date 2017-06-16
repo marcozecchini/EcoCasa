@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using EcoCasa.Models;
+using EcoCasa.Util;
 using SQLite;
 using SQLitePCL;
 
@@ -43,6 +44,11 @@ namespace EcoCasa.DB
             return database.Table<User>().FirstOrDefault(u => user.Equals(u));
         }
 
+        public List<User> FindAllUsers()
+        {
+            return database.Table<User>().Where(user => !user.Email.Equals(Constants.User.Email) ).ToList();
+        }
+
         public User GetUser(int id)
         {
             return database.Table<User>().FirstOrDefault(i => i.ID == id);
@@ -58,7 +64,7 @@ namespace EcoCasa.DB
             return database.Table<SmartCasa>().Where(casa => casa.Administrator.Equals(user.Email)).ToList();
         }
 
-        public int SaveUserAsync(User User)
+        public int SaveUser(User User)
         {
             if (User.ID != 0)
             {

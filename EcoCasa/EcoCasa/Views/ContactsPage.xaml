@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.ContactsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:ContactsViewModel x:Key="ContactsViewModel"></viewModel:ContactsViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout BindingContext="{StaticResource ContactsViewModel}">
+        <Label Text="Put here the email of the user you want to add:"></Label>
+        <Entry Text="{Binding Email}"></Entry>
+        <Label Text="The name you want to use"></Label>
+        <Entry Text="{Binding Name}"></Entry>
+        <Button Text="Add" Command="{Binding ValidateUser}"></Button>
+
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Contacts}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

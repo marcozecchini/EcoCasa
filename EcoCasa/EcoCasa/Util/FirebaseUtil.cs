@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -153,7 +154,6 @@ namespace EcoCasa.Util
         public static async Task<String> PostSmartCasa(SmartCasa casa)
         {
             var req = DB_URL + "/SmartCasa.json?auth=" + AUTH_TOKEN;
-            JsonConvert.SerializeObject(casa);
             var content = new StringContent(JsonConvert.SerializeObject(casa));
             var httpClient = new HttpClient();
 
@@ -163,7 +163,18 @@ namespace EcoCasa.Util
             return resultData;
         }
 
+        public static async Task<bool> addContacts(User Contact, string code)
+        {
+            var req = DB_URL + "/User/" + Constants.Code + "/Users/" + code + ".json?auth=" + AUTH_TOKEN;            
+            var content = new StringContent(JsonConvert.SerializeObject(Contact));
+            var httpClient = new HttpClient();
 
+            var httpResponse = await httpClient.PutAsync(req, content);
+            var responseData = httpResponse.StatusCode;
+
+            if (responseData == HttpStatusCode.OK) return true;
+            else return false;
+        }
 
         private static string exctractCode(String response)
         {
