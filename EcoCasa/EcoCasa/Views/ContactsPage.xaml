@@ -16,7 +16,7 @@
         <Entry Text="{Binding Name}"></Entry>
         <Button Text="Add" Command="{Binding ValidateUser}"></Button>
 
-        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Contacts}" >
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Contacts}" ItemSelected="ListView_OnItemSelected" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>

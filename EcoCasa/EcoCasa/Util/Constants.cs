@@ -32,5 +32,13 @@ namespace EcoCasa.Util
 
         //SmartCasa to visualize
         public static SmartCasa CurrentCasa;
+
+        //SmartCasa before contacts page?
+        public static bool SmartCasaBefore = false;
+        //User to add in a SmartCasa.
+        public static User UserToAdd;
+
+        //Association size
+        public static int AssociationSmartCasaUserSize = 0;
     }
 }

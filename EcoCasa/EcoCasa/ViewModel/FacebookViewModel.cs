@@ -31,6 +31,7 @@ namespace EcoCasa.ViewModel
             if (Constants.Code == null)
             {
                 await FirebaseUtil.PostUser(User);
+                Constants.User.ID = App.Database.SaveSessionUser(User);
                 App.Database.SaveSessionUser(User);
 
             }

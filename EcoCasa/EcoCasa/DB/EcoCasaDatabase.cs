@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using EcoCasa.DB.Associations;
 using EcoCasa.Models;
 using EcoCasa.Util;
 using SQLite;
@@ -19,6 +20,12 @@ namespace EcoCasa.DB
             database.CreateTable<User>();
 //            database.CreateTable<Address>();
             database.CreateTable<SmartCasa>();
+            database.CreateTable<SmartCasaUserAssiociation>();
+        }
+
+        public int countSmartCasaSessionUser()
+        {
+            return database.Query<SmartCasaUserAssiociation>("select * from [SmartCasaUserAssociation]").Count;
         }
 
         public int CountSessionUser()
@@ -54,14 +61,40 @@ namespace EcoCasa.DB
             return database.Table<User>().FirstOrDefault(i => i.ID == id);
         }
 
-        public SmartCasa GetSmartCasa(int id)
+        public SmartCasa GetSmartCasa(string code)
         {
-            return database.Table<SmartCasa>().FirstOrDefault(i => i.Id == id);
+            return database.Table<SmartCasa>().FirstOrDefault(i => i.CodeCasa.Equals(code));
+        }
+
+        public SmartCasaUserAssiociation GetSmartCasaUserAssiociation(int id)
+        {
+            return database.Table<SmartCasaUserAssiociation>().FirstOrDefault(i => i.ID == id);
         }
 
         public List<SmartCasa> GetCasas(User user)
         {
-            return database.Table<SmartCasa>().Where(casa => casa.Administrator.Equals(user.Email)).ToList();
+            List<SmartCasa> ris = new List<SmartCasa>();
+            ris = database.Table<SmartCasa>().Where(casa => casa.Administrator.Equals(user.Email)).ToList();
+
+            List<SmartCasaUserAssiociation> temp2 = new List<SmartCasaUserAssiociation>();
+            temp2 = database.Table<SmartCasaUserAssiociation>().Where(a => a.Email.Equals(user.Email)).ToList();
+            List<SmartCasa> ris2 = new List<SmartCasa>();
+
+            foreach (var code in temp2)
+            {
+                var a = GetSmartCasa(code.CodeCasa);
+                if (a != null) ris2.Add(a);
+            }
+
+            foreach (var t in ris2) ris.Add(t);
+
+            return ris;
+        }
+
+        public List<SmartCasaUserAssiociation> GetSmartCasaUserAssiociations(SmartCasa casa)
+        {
+            // return the list of utents in this association with the given smartcasa.
+            return database.Table<SmartCasaUserAssiociation>().Where(association => association.CodeCasa.Equals(casa.CodeCasa)).ToList();
         }
 
         public int SaveUser(User User)
@@ -76,14 +109,27 @@ namespace EcoCasa.DB
             }
         }
 
+        public int SaveSmartCasaUserAssociation(SmartCasaUserAssiociation Association)
+        {
+            if (Association.ID != Constants.AssociationSmartCasaUserSize)
+            {
+                return database.Update(Association);
+            }
+            else
+            {
+                return database.Insert(Association);
+            }
+        }
+
         public int SaveSmartCasa(SmartCasa casa)
         {
-            if (casa.Id != 0)
+            if (casa.Update)
             {
                 return database.Update(casa);
             }
             else
             {
+                casa.Update = true;
                 return database.Insert(casa);
             }
         }
@@ -105,14 +151,37 @@ namespace EcoCasa.DB
             return database.Delete(user);
         }
 
+        public int DeleteAllSmartCasa()
+        {
+            database.DropTable<SmartCasa>();
+            return database.CreateTable<SmartCasa>();
+        }
+
+        public int DeleteSmartCasa(SmartCasa casa)
+        {
+            return database.Delete(casa);
+//            database.DropTable<SmartCasa>();
+//            return database.CreateTable<SmartCasa>();
+        }
+
         public int DeleteSessionUser(SessionUser user)
         {
             return database.Delete(user);
+        }
+
+        public int DeleteSmartCasaUserAssociation(SmartCasaUserAssiociation association)
+        {
+            return database.Delete(association);
         }
 
         /*public Task<List<SessionUser>> DeleteSessionUserAsync(SessionUser user)
         {
             return database.QueryAsync<SessionUser>("DELETE from SessionUser");
         }*/
+        public int DeleteAlSmartCasaUserAssociation()
+        {
+            database.DropTable<SmartCasaUserAssiociation>();
+            return database.CreateTable<SmartCasaUserAssiociation>();
+        }
     }
 }

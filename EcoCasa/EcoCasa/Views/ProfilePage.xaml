@@ -16,11 +16,12 @@
     <StackLayout BindingContext="{StaticResource ProfileViewModel}">
         <Label Text="{Binding Nome}"></Label>
         <Label Text="{Binding Email}"></Label>
-
-        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Casa}" ItemSelected="ListView_OnItemSelected" >
+        
+        <Button Text="Update Casas" Command="{Binding UpdateCasasCommand}"></Button>        
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Casa}" ItemSelected="ListView_OnItemSelected" RefreshCommand="{Binding UpdateCasasCommand}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Address}"></TextCell>
+                    <TextCell Text="{Binding Name}" Detail="{Binding CodeCasa}"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

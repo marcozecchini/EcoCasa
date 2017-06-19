@@ -16,6 +16,8 @@ namespace EcoCasa.Views
         private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var a = e.SelectedItem;
+            e = null;
+            sender = null;
             Constants.CurrentCasa = (SmartCasa) a;
             App.Locator.Profile.SetCasa.Execute(null);
         }

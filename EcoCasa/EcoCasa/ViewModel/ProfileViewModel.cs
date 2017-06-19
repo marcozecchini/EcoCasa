@@ -15,6 +15,9 @@ namespace EcoCasa.ViewModel
     {
         public ProfileViewModel()
         {
+            //set to false to avoid problems
+            Constants.SmartCasaBefore = false;
+            //            await FirebaseUtil.UpdateSmartCasas();
             Email = Constants.User.Email;
             Nome = Constants.User.Name;
             Casa = new ObservableCollection<SmartCasa>();
@@ -24,10 +27,19 @@ namespace EcoCasa.ViewModel
             LogOutCommand = new Command(() =>
             {
                 var del = App.Database.DeleteSessionUser(Constants.User);
+                //cancel all session casas.
+                App.Database.DeleteAllSmartCasa();
+                App.Database.DeleteAlSmartCasaUserAssociation();
                 Constants.User = null;
                 Constants.Code = "";
                 App.Locator.NavigationService.SetNewRoot(Locator.MainPage);
             });
+
+            UpdateCasasCommand = new Command(async () =>
+            {
+                await FirebaseUtil.UpdateSmartCasas();
+                App.Locator.NavigationService.SetNewRoot(Locator.ProfilePage);
+            } );
 
             CreateSmartCasaCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.CreateSmartCasaPage));
             SetCasa = new Command( () =>
@@ -47,7 +59,7 @@ namespace EcoCasa.ViewModel
         public List<SmartCasa> CasaEnumerator { get; set; }
         public ObservableCollection<SmartCasa> Casa { get; set; }
         
-
+        public ICommand UpdateCasasCommand { private set; get; }
         public ICommand LogOutCommand { private set; get; }
         public ICommand CreateSmartCasaCommand { private set; get; }
         public ICommand Contacts { private set; get; }

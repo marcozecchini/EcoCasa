@@ -14,5 +14,8 @@
     <StackLayout BindingContext="{StaticResource SmartCasaViewModel}">
         <Label Text="{Binding Casa.Name}"></Label>
         <Label Text="{Binding Casa.Address}"></Label>
+        
+        <Button Text="Add new User to this SmartCasa" Command="{Binding AddNewToSmartCasaCommand}" IsVisible="{Binding Administrator}"></Button>
+        <Button Text="Delete SmartCasa" Command="{Binding DeleteCommand}" IsVisible="{Binding Administrator}"></Button>
     </StackLayout>
 </ContentPage>

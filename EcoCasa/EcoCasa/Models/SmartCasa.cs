@@ -7,16 +7,17 @@ namespace EcoCasa.Models
     [Table("SmartCasa")]
     public class SmartCasa
     {
-        [PrimaryKey, AutoIncrement]
+        
         public int Id { get; set; }
-
+        [PrimaryKey]
         public string CodeCasa { get; set; }
         [JsonProperty("Name")]
         public string Name { get; set; }
 
         [JsonProperty("Address")] 
         public string Address { get; set; }
-
+        //to check if it's insert or update
+        public bool Update { get; set; }
         //Associations
         [JsonProperty("Ad_Email")]
         public string Administrator { get; set; }

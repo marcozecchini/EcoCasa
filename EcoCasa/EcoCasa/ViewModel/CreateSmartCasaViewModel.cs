@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using EcoCasa.DB.Associations;
 using EcoCasa.Models;
 using EcoCasa.Util;
 using GalaSoft.MvvmLight;
@@ -40,8 +41,19 @@ namespace EcoCasa.ViewModel
                 await App.Locator.DialogService.ShowMessageBox("Casa already in the db", "Error");
                 return false;
             }
-            await FirebaseUtil.PostSmartCasa(casa);
+
+            casa.Update = false;
+            casa.CodeCasa= await FirebaseUtil.PostSmartCasa(casa);
+            casa.Id = App.Database.SaveSmartCasa(casa);
             App.Database.SaveSmartCasa(casa);
+
+//            SmartCasaUserAssiociation association = new SmartCasaUserAssiociation();
+//            association.Email = Constants.User.Email;
+//            association.NameCasa = Name;
+//            association.ID = App.Database.SaveSmartCasaUserAssociation(association);
+//            App.Database.SaveSmartCasaUserAssociation(association);
+
+
             return true;
         }
     }

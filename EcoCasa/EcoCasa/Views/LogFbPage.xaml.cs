@@ -46,6 +46,8 @@ namespace EcoCasa.Views
                 var vm = new FacebookViewModel();
 
                 Constants.User = (SessionUser)await vm.SetFacebookUserProfileAsync(accessToken);
+                //check here if there are problems
+                await FirebaseUtil.UpdateSmartCasas();
                 App.Locator.NavigationService.SetNewRoot(Locator.ProfilePage);
 
             }
