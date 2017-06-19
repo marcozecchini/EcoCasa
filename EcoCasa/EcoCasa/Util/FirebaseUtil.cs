@@ -41,6 +41,20 @@ namespace EcoCasa.Util
             return JSON;
         }
 
+        public static async Task<JObject> GetSmartDeviceDB()
+        {
+            var req = DB_URL + "/SmartCasa/"+ Constants.CurrentCasa.CodeCasa + "/Device.json?auth=" + AUTH_TOKEN;
+            var httpClient = new HttpClient();
+            JObject JSON = null;
+
+            var DBJson = await httpClient.GetStringAsync(req);
+            if (!DBJson.Equals("null")) JSON = JObject.Parse(DBJson);
+
+            return JSON;
+        }
+
+
+
         public static async Task<String> GetSessionUserCode(SessionUser user)
         {
             JObject JSON = await GetUserDB();
@@ -114,6 +128,17 @@ namespace EcoCasa.Util
             return User;
         }
 
+        public static async Task<SmartDevice> GetSmartDeviceDate(String id)
+        {
+            var req = DB_URL + "/SmartCasa/"+ Constants.CurrentCasa.CodeCasa +"/Device.json?auth=" + AUTH_TOKEN + "&orderBy=\"$key\"&startAt=\"" + id + "\"&endAt=\"" + id + "\"";
+            var httpClient = new HttpClient();
+
+            var DBJson = await httpClient.GetStringAsync(req);
+            var removedString = removeCode(id, DBJson);
+            var Device = JsonConvert.DeserializeObject<SmartDevice>(removedString);
+
+            return Device;
+        }
 
 
         public static async Task<SmartCasa> GetSmartCasaDate(string id)
@@ -122,6 +147,7 @@ namespace EcoCasa.Util
             var httpClient = new HttpClient();
             var DBJson = await httpClient.GetStringAsync(req);
             var removedString = removeCode(id, DBJson);
+            removedString = removeDevice(removedString);
             var casa = JsonConvert.DeserializeObject<SmartCasa>(removedString);
 
             return casa;
@@ -168,6 +194,18 @@ namespace EcoCasa.Util
             return resultData;
         }
 
+        public static async Task<String> PostSmartDevice(SmartDevice device)
+        {
+            var req = DB_URL + "/SmartCasa/"+ Constants.CurrentCasa.CodeCasa + "/Device.json?auth=" + AUTH_TOKEN;
+            var content = new StringContent(JsonConvert.SerializeObject(device));
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.PostAsync(req, content);
+            var responseData = httpResponse.Content.ReadAsStringAsync().Result;
+            var resultData = exctractCode(responseData);
+            return resultData;
+        }
+
         public static async Task<bool> DeleteSmartCasa(SmartCasa casa)
         {
             var req = DB_URL + "/SmartCasa/" + casa.CodeCasa + ".json?auth=" + AUTH_TOKEN;
@@ -180,6 +218,18 @@ namespace EcoCasa.Util
             if (responseData == HttpStatusCode.OK) return true;
             else return false;
 
+        }
+
+        public static async Task<bool> DeleteSmartDevice(SmartCasa currentCasa, SmartDevice currentDevice)
+        {
+            var req = DB_URL+ "/SmartCasa/" + currentCasa.CodeCasa + "/Device/" + currentDevice.CodeDevice + ".json?auth=" + AUTH_TOKEN;
+            var httpClient = new HttpClient();
+
+            var httpResponse = await httpClient.DeleteAsync(req);
+            var responseData = httpResponse.StatusCode;
+
+            if (responseData == HttpStatusCode.OK) return true;
+            else return false;
         }
 
         public static async Task<bool> addContacts(User Contact, string code)
@@ -330,6 +380,52 @@ namespace EcoCasa.Util
             return true;
         }
 
+        public static async Task<bool> UpdateDevice()
+        {
+            try
+            {
+                JObject JSON = await GetSmartDeviceDB();
+                if (JSON == null)
+                {
+                    return true;
+                }
+
+                List<string> smartKey = new List<string>();
+                foreach (var jdevice in JSON)
+                {
+                    smartKey.Add(jdevice.Key);
+                }
+
+                List<SmartDevice> smartDevices = new List<SmartDevice>();
+
+                foreach (var code in smartKey)
+                {
+                    SmartDevice device = await FirebaseUtil.GetSmartDeviceDate(code);
+                    device.CodeDevice = code;
+                    smartDevices.Add(device);
+                }
+
+                foreach (var device in smartDevices)
+                {
+                    var res = App.Database.GetSmartDevicesOfSmartCasa(device.CasaCode);
+//                    device.Update = true;
+                    if (!res.Contains(device))
+                    {   
+//                        if (device.Update) 
+//                        device.Update = false;
+                        App.Database.SaveSmartDevice(device);
+                    }
+                }
+
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
         private static async Task<List<String>> getEmailUsersInSmartCasa(string idCasa)
         {
@@ -358,6 +454,20 @@ namespace EcoCasa.Util
             return stringRes;
         }
 
+        private static string removeDevice(string toRemove)
+        {
+            var stringRes = ""; var sub = "";
+            if (toRemove.Contains("\"Device\""))
+            {
+                sub = toRemove.Substring(toRemove.IndexOf("\"Device\""),
+                    toRemove.IndexOf("\"Id\":") - toRemove.IndexOf("\"Device\""));
+                stringRes = toRemove.Replace(sub, "");
+
+            }
+            else return toRemove;
+
+            return stringRes;
+        }
 
         private static string exctractCode(String response)
         {
@@ -370,8 +480,7 @@ namespace EcoCasa.Util
             return stringRes;
         }
 
-        
 
-       
+        
     }
 }

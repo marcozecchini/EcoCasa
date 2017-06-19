@@ -26,6 +26,8 @@ namespace EcoCasa.Util
             nav.Configure(Locator.CreateSmartCasaPage, typeof(CreateSmartCasaPage));
             nav.Configure(Locator.SmartCasaPage, typeof(SmartCasaPage));
             nav.Configure(Locator.ContactsPage, typeof(ContactsPage));
+            nav.Configure(Locator.CreateSmartDevicePage, typeof(CreateSmartDevicePage));
+            nav.Configure(Locator.SmartDevicePage, typeof(SmartDevicePage));
 
             //Singleton di NavigationService
             SimpleIoc.Default.Register(() => nav);
@@ -39,6 +41,8 @@ namespace EcoCasa.Util
             SimpleIoc.Default.Register<CreateSmartCasaViewModel>();
             SimpleIoc.Default.Register<SmartCasaViewModel>();
             SimpleIoc.Default.Register<ContactsViewModel>();
+            SimpleIoc.Default.Register<CreateSmartDeviceViewModel>();
+            SimpleIoc.Default.Register<SmartDeviceViewModel>();
 
             //DialogService
             var dialog = new DialogService();
@@ -53,6 +57,8 @@ namespace EcoCasa.Util
         public const string CreateSmartCasaPage = "CreateSmartCasaPage";
         public const string SmartCasaPage = "SmartCasaPage";
         public const string ContactsPage = "ContactsPage";
+        public const string CreateSmartDevicePage = "CreateSmartDevicePage";
+        public const string SmartDevicePage = "SmartDevicePage";
         
         public MainViewModel Main
         {
@@ -96,9 +102,19 @@ namespace EcoCasa.Util
             get { return ServiceLocator.Current.GetInstance<CreateSmartCasaViewModel>(); }
         }
 
+        public CreateSmartDeviceViewModel CreateSmartDevice
+        {
+            get { return ServiceLocator.Current.GetInstance<CreateSmartDeviceViewModel>(); }
+        }
+
         public SmartCasaViewModel SmartCasa
         {
             get { return ServiceLocator.Current.GetInstance<SmartCasaViewModel>(); }
+        }
+
+        public SmartDeviceViewModel SmartDevice
+        {
+            get { return ServiceLocator.Current.GetInstance<SmartDeviceViewModel>(); }
         }
 
         public ContactsViewModel Contacts

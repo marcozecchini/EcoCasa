@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.SmartDevicePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:SmartDeviceViewModel x:Key="SmartDeviceViewModel"></viewModel:SmartDeviceViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BindingContext="{StaticResource SmartDeviceViewModel}">
+        <Label Text="{Binding IP}"></Label>
+        <Label Text="{Binding MAC}"></Label>
+        <Label Text="Toggled to activate or disactivate the SmartDevice"></Label>
+        <Switch IsToggled="False" Toggled="Switch_OnToggled"></Switch>
+        <Button Text="Delete Device" Command="{Binding DeleteDeviceCommand}"></Button>
+    </StackLayout>
+
+</ContentPage>

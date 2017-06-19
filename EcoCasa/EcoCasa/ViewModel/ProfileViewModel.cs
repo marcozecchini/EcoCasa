@@ -30,6 +30,7 @@ namespace EcoCasa.ViewModel
                 //cancel all session casas.
                 App.Database.DeleteAllSmartCasa();
                 App.Database.DeleteAlSmartCasaUserAssociation();
+                App.Database.DeleteAllSmartDevice();
                 Constants.User = null;
                 Constants.Code = "";
                 App.Locator.NavigationService.SetNewRoot(Locator.MainPage);
@@ -42,9 +43,10 @@ namespace EcoCasa.ViewModel
             } );
 
             CreateSmartCasaCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.CreateSmartCasaPage));
-            SetCasa = new Command( () =>
+            SetCasa = new Command( async () =>
             {
                 //Constants.CurrentCasa.Name = (string)name;
+                await FirebaseUtil.UpdateDevice();
                 App.Locator.NavigationService.NavigateTo(Locator.SmartCasaPage);
 
             });

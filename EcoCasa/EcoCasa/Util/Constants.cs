@@ -32,6 +32,8 @@ namespace EcoCasa.Util
 
         //SmartCasa to visualize
         public static SmartCasa CurrentCasa;
+        //SmartDevice to visualize
+        public static SmartDevice CurrentDevice;
 
         //SmartCasa before contacts page?
         public static bool SmartCasaBefore = false;

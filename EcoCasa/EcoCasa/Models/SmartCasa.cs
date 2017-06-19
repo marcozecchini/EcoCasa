@@ -21,7 +21,10 @@ namespace EcoCasa.Models
         //Associations
         [JsonProperty("Ad_Email")]
         public string Administrator { get; set; }
-        
+
+        [JsonProperty("Device")]
+        public string Device { get; set; }
+
         [JsonProperty("CodeUsers"), Column("UserEmail")]
         public string UserEmail { get; set; }
     }

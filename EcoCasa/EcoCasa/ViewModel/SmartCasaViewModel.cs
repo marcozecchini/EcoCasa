@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using EcoCasa.Models;
 using EcoCasa.Util;
 using GalaSoft.MvvmLight;
@@ -12,7 +14,12 @@ namespace EcoCasa.ViewModel
         {
             Casa = Constants.CurrentCasa;
             Administrator = IsAdministrator();
-           AddNewToSmartCasaCommand = new Command(() =>
+
+            Device = new ObservableCollection<SmartDevice>();
+            DeviceEnumerator = App.Database.GetSmartDevicesOfSmartCasa(Casa.CodeCasa);
+            foreach (var c in DeviceEnumerator) Device.Add(c);
+
+            AddNewToSmartCasaCommand = new Command(() =>
            {
                 Constants.SmartCasaBefore = true;
                 App.Locator.NavigationService.NavigateTo(Locator.ContactsPage);
@@ -26,6 +33,8 @@ namespace EcoCasa.ViewModel
                 App.Locator.NavigationService.SetNewRoot(Locator.ProfilePage);
             
             });
+
+            AddDeviceCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.SmartDevicePage));
         }
 
         private bool IsAdministrator()
@@ -33,9 +42,13 @@ namespace EcoCasa.ViewModel
             return Casa.Administrator.Equals(Constants.User.Email);
         }
 
+        public List<SmartDevice> DeviceEnumerator { get; set; }
+        public ObservableCollection<SmartDevice> Device { get; set; }
+
         public bool Administrator { get; private set; }
         public SmartCasa Casa { get; private set; }
         public ICommand AddNewToSmartCasaCommand { private set; get; }
         public ICommand DeleteCommand { private set; get; }
+        public ICommand AddDeviceCommand { set; get; }
     }
 }

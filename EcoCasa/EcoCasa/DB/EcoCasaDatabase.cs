@@ -21,6 +21,7 @@ namespace EcoCasa.DB
 //            database.CreateTable<Address>();
             database.CreateTable<SmartCasa>();
             database.CreateTable<SmartCasaUserAssiociation>();
+            database.CreateTable<SmartDevice>();
         }
 
         public int countSmartCasaSessionUser()
@@ -51,10 +52,16 @@ namespace EcoCasa.DB
             return database.Table<User>().FirstOrDefault(u => user.Equals(u));
         }
 
+        public SmartDevice GetSmartDevice(SmartDevice device)
+        {
+            return database.Table<SmartDevice>().FirstOrDefault(u => device.Equals(u));
+        }
+
         public List<User> FindAllUsers()
         {
             return database.Table<User>().Where(user => !user.Email.Equals(Constants.User.Email) ).ToList();
         }
+
 
         public User GetUser(int id)
         {
@@ -89,6 +96,11 @@ namespace EcoCasa.DB
             foreach (var t in ris2) ris.Add(t);
 
             return ris;
+        }
+
+        public List<SmartDevice> GetSmartDevicesOfSmartCasa(string codeCasa)
+        {
+            return database.Table<SmartDevice>().Where(d => d.CasaCode.Equals(codeCasa)).ToList();
         }
 
         public List<SmartCasaUserAssiociation> GetSmartCasaUserAssiociations(SmartCasa casa)
@@ -134,6 +146,19 @@ namespace EcoCasa.DB
             }
         }
 
+        public int SaveSmartDevice(SmartDevice device)
+        {
+            if (device.Update)
+            {
+                return database.Update(device);
+            }
+            else
+            {
+                device.Update = true;
+                return database.Insert(device);
+            }
+        }
+
         public int SaveSessionUser(SessionUser User)
         {
             if (User.ID != 0)
@@ -162,6 +187,17 @@ namespace EcoCasa.DB
             return database.Delete(casa);
 //            database.DropTable<SmartCasa>();
 //            return database.CreateTable<SmartCasa>();
+        }
+
+        public int DeleteSmartDevice(SmartDevice device)
+        {
+            return database.Delete(device);
+        }
+
+        public int DeleteAllSmartDevice()
+        {
+            database.DropTable<SmartDevice>();
+            return database.CreateTable<SmartDevice>();
         }
 
         public int DeleteSessionUser(SessionUser user)

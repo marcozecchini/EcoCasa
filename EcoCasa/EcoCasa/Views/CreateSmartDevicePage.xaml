@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
+             x:Class="EcoCasa.Views.CreateSmartDevicePage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModel:CreateSmartDeviceViewModel x:Key="CreateSmartDeviceViewModel"></viewModel:CreateSmartDeviceViewModel>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BindingContext="{StaticResource CreateSmartDeviceViewModel}">
+        <Label Text="IP"></Label>
+        <Entry Text="{Binding IP}"></Entry>
+        <Label Text="MAC"></Label>
+        <Entry Text="{Binding MAC}"></Entry>
+        <Button Text="Validate" Command="{Binding ValidateSmartDevice}"></Button>
+    </StackLayout>
+</ContentPage>

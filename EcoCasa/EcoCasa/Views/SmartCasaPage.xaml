@@ -14,7 +14,16 @@
     <StackLayout BindingContext="{StaticResource SmartCasaViewModel}">
         <Label Text="{Binding Casa.Name}"></Label>
         <Label Text="{Binding Casa.Address}"></Label>
-        
+
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Device}" ItemSelected="ListView_OnItemSelected" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding MAC}" Detail="{Binding IP}"></TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Add Device" Command="{Binding AddDeviceCommand}"></Button>
         <Button Text="Add new User to this SmartCasa" Command="{Binding AddNewToSmartCasaCommand}" IsVisible="{Binding Administrator}"></Button>
         <Button Text="Delete SmartCasa" Command="{Binding DeleteCommand}" IsVisible="{Binding Administrator}"></Button>
     </StackLayout>
