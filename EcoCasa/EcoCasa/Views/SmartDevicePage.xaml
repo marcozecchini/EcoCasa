@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
-             x:Class="EcoCasa.Views.SmartDevicePage">
+             x:Class="EcoCasa.Views.SmartDevicePage"
+             Title="Smart Device's Page">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -10,12 +11,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout BindingContext="{StaticResource SmartDeviceViewModel}">
-        <Label Text="{Binding IP}"></Label>
-        <Label Text="{Binding MAC}"></Label>
-        <Label Text="Toggled to activate or disactivate the SmartDevice"></Label>
-        <Switch IsToggled="False" Toggled="Switch_OnToggled"></Switch>
-        <Button Text="Delete Device" Command="{Binding DeleteDeviceCommand}"></Button>
+    <StackLayout BindingContext="{StaticResource SmartDeviceViewModel}" BackgroundColor="Black">
+        <Label Text="{Binding IP}" BackgroundColor="Black" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
+        <Label Text="{Binding MAC}" BackgroundColor="Black" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
+        <Label Text="Toggled to activate or disactivate the SmartDevice" TextColor="White"></Label>
+        <Switch IsToggled="False" Toggled="Switch_OnToggled" BackgroundColor="White"></Switch>
+        <Button Text="Delete Device" Command="{Binding DeleteDeviceCommand}"  VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
     </StackLayout>
 
 </ContentPage>

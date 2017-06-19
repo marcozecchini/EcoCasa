@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
-             x:Class="EcoCasa.Views.CreateSmartDevicePage">
+             x:Class="EcoCasa.Views.CreateSmartDevicePage"
+             Title="Create SmartDevice">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -10,11 +11,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout BindingContext="{StaticResource CreateSmartDeviceViewModel}">
-        <Label Text="IP"></Label>
+    <StackLayout BindingContext="{StaticResource CreateSmartDeviceViewModel}" BackgroundColor="Black">
+        <Label Text="IP" FontFamily="Bold" FontSize="26" TextColor="White" ></Label>
         <Entry Text="{Binding IP}"></Entry>
-        <Label Text="MAC"></Label>
+        <Label Text="MAC" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
         <Entry Text="{Binding MAC}"></Entry>
-        <Button Text="Validate" Command="{Binding ValidateSmartDevice}"></Button>
+        <Button Text="Validate" Command="{Binding ValidateSmartDevice}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
     </StackLayout>
 </ContentPage>

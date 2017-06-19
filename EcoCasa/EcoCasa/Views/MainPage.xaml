@@ -5,19 +5,16 @@
              xmlns:local="clr-namespace:EcoCasa"
              xmlns:toolkit="clr-namespace:EcoCasa.ViewModel;assembly=EcoCasa"
              x:Class="EcoCasa.Views.MainPage"
-             Title="EcoCasa">
+             Title="EcoCasa" BackgroundColor="Green">
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:MainViewModel x:Key="MainViewModel"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout BindingContext="{StaticResource MainViewModel}">
-        <Button Text="LogIn" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LogInCommand}"/>
-        <Button Text="Registration" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Command="{Binding RegistrationCommand}"></Button>
-        <Button Text="LogInWithFB" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LogInWithFB}" TextColor="White" 
-                BackgroundColor="#01579B"
-                Font="Bold"
-                FontSize="26"></Button>
+    <StackLayout BindingContext="{StaticResource MainViewModel}" BackgroundColor="Black">
+        <Button Text="LogIn"  Command="{Binding LogInCommand}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"/>
+        <Button Text="Registration" Command="{Binding RegistrationCommand}"  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
+        <Button Text="LogInWithFB" VerticalOptions="Center" HorizontalOptions="Center" Command="{Binding LogInWithFB}" TextColor="White"  BackgroundColor="#01579B" Font="Bold" FontSize="26"></Button>
     </StackLayout>
 </ContentPage>

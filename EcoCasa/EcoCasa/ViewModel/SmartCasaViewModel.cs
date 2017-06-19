@@ -14,7 +14,7 @@ namespace EcoCasa.ViewModel
         {
             Casa = Constants.CurrentCasa;
             Administrator = IsAdministrator();
-
+            
             Device = new ObservableCollection<SmartDevice>();
             DeviceEnumerator = App.Database.GetSmartDevicesOfSmartCasa(Casa.CodeCasa);
             foreach (var c in DeviceEnumerator) Device.Add(c);
@@ -34,7 +34,9 @@ namespace EcoCasa.ViewModel
             
             });
 
-            AddDeviceCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.SmartDevicePage));
+            AddDeviceCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.CreateSmartDevicePage));
+
+            DeviceCommand = new Command(() => App.Locator.NavigationService.NavigateTo(Locator.SmartDevicePage));
         }
 
         private bool IsAdministrator()
@@ -49,6 +51,7 @@ namespace EcoCasa.ViewModel
         public SmartCasa Casa { get; private set; }
         public ICommand AddNewToSmartCasaCommand { private set; get; }
         public ICommand DeleteCommand { private set; get; }
-        public ICommand AddDeviceCommand { set; get; }
+        public ICommand AddDeviceCommand { private set; get; }
+        public ICommand DeviceCommand { set; get; }
     }
 }

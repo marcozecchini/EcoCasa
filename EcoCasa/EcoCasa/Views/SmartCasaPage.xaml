@@ -11,20 +11,20 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout BindingContext="{StaticResource SmartCasaViewModel}">
-        <Label Text="{Binding Casa.Name}"></Label>
-        <Label Text="{Binding Casa.Address}"></Label>
+    <StackLayout BindingContext="{StaticResource SmartCasaViewModel}" BackgroundColor="Black">
+        <Label Text="{Binding Casa.Name}" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
+        <Label Text="{Binding Casa.Address}" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
 
-        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Device}" ItemSelected="ListView_OnItemSelected" >
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Device}" ItemSelected="ListView_OnItemSelected"  SeparatorColor="Green">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding MAC}" Detail="{Binding IP}"></TextCell>
+                    <TextCell Text="{Binding MAC}" Detail="{Binding IP}" TextColor="Green" DetailColor="White"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Text="Add Device" Command="{Binding AddDeviceCommand}"></Button>
-        <Button Text="Add new User to this SmartCasa" Command="{Binding AddNewToSmartCasaCommand}" IsVisible="{Binding Administrator}"></Button>
-        <Button Text="Delete SmartCasa" Command="{Binding DeleteCommand}" IsVisible="{Binding Administrator}"></Button>
+        <Button Text="Add Device" Command="{Binding AddDeviceCommand}"  VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
+        <Button Text="Add new User to this SmartCasa" Command="{Binding AddNewToSmartCasaCommand}" IsVisible="{Binding Administrator}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
+        <Button Text="Delete SmartCasa" Command="{Binding DeleteCommand}" IsVisible="{Binding Administrator}"  VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
     </StackLayout>
 </ContentPage>

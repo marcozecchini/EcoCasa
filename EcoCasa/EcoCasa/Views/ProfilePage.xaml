@@ -13,21 +13,21 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <StackLayout BindingContext="{StaticResource ProfileViewModel}">
-        <Label Text="{Binding Nome}"></Label>
-        <Label Text="{Binding Email}"></Label>
-        
-        <Button Text="Update Casas" Command="{Binding UpdateCasasCommand}"></Button>        
-        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Casa}" ItemSelected="ListView_OnItemSelected" RefreshCommand="{Binding UpdateCasasCommand}">
+    <StackLayout BindingContext="{StaticResource ProfileViewModel}" BackgroundColor="Black">
+        <Label Text="{Binding Nome}" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
+        <Label Text="{Binding Email}" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
+
+        <Button Text="Update Casas" Command="{Binding UpdateCasasCommand}" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>        
+        <ListView SeparatorVisibility="Default" ItemsSource="{Binding Casa}" ItemSelected="ListView_OnItemSelected" RefreshCommand="{Binding UpdateCasasCommand}" SeparatorColor="Green">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding CodeCasa}"></TextCell>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Address}"  TextColor="Green" DetailColor="White"></TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
-        <Button Text="Contacts" Command="{Binding Contacts}"></Button>
-        <Button Text="Add new SmartCasa" Command="{Binding CreateSmartCasaCommand}"></Button>
-        <Button Text="Logout" Command="{Binding LogOutCommand}"></Button>
+
+        <Button Text="Contacts" Command="{Binding Contacts}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
+        <Button Text="Add new SmartCasa" Command="{Binding CreateSmartCasaCommand}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
+        <Button Text="Logout" Command="{Binding LogOutCommand}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
     </StackLayout>
 </ContentPage>

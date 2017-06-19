@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout x:Name ="MainStackLayout">
+    <StackLayout x:Name ="MainStackLayout" BackgroundColor="Black">
 
     </StackLayout>
 </ContentPage>

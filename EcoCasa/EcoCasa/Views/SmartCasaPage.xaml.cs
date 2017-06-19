@@ -22,7 +22,7 @@ namespace EcoCasa.Views
 	    {
 	        var d = e.SelectedItem;
 	        Constants.CurrentDevice = (SmartDevice) d;
-	        App.Locator.SmartCasa.AddDeviceCommand.Execute(null);
+	        App.Locator.SmartCasa.DeviceCommand.Execute(null);
 	    }
 	}
 }
