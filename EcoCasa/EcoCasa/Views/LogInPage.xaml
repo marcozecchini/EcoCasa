@@ -14,7 +14,7 @@
     <StackLayout BindingContext="{StaticResource LogInViewModel}" BackgroundColor="Black">
         <Label Text="Complete the fields" HorizontalOptions="Center" FontFamily="Bold" FontSize="26" TextColor="White"></Label>
         <Entry x:Name="email" Placeholder="Email" Text="{Binding Email}"></Entry>
-        <Entry x:Name="password" Placeholder="Passwords" IsPassword="True" Text="{Binding Password}" TextColor="White"></Entry>
+        <Entry x:Name="password" Placeholder="Passwords" IsPassword="True" Text="{Binding Password}"></Entry>
         <Button Text="Login" Command="{Binding GoLogInCommand}" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"/>    
     </StackLayout>
     

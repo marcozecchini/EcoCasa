@@ -13,17 +13,17 @@
     <StackLayout BindingContext="{StaticResource RegistrationViewModel}" BackgroundColor="Black">
         <Label Text="Account registration. Complete the fields below:" TextColor="White"></Label>
         <Label Text="First Name" TextColor="White"></Label>
-        <Entry x:Name="FirstName"  Text="{Binding FirstName}"></Entry>
+        <Entry x:Name="FirstName"  Text="{Binding FirstName}" TextColor="Black"></Entry>
         <Label Text="Last Name" TextColor="White"></Label>
-        <Entry x:Name="LastName" Text="{Binding LastName}" TextColor="White"></Entry>
+        <Entry x:Name="LastName" Text="{Binding LastName}"></Entry>
         <Label Text="Email" TextColor="White"></Label>
-        <Entry x:Name="Email" Keyboard="Email" Text="{Binding Email}" TextColor="White"></Entry>
+        <Entry x:Name="Email" Keyboard="Email" Text="{Binding Email}" ></Entry>
         <Label Text="Confirm Email" TextColor="White"></Label>
-        <Entry x:Name="ConfirmMail" Keyboard="Email" Text="{Binding ConfirmEmail}" TextColor="White"></Entry>
+        <Entry x:Name="ConfirmMail" Keyboard="Email" Text="{Binding ConfirmEmail}" ></Entry>
         <Label Text="Password" TextColor="White"></Label>
-        <Entry x:Name="Password" IsPassword="True" Text="{Binding Password}" TextColor="White"></Entry>
+        <Entry x:Name="Password" IsPassword="True" Text="{Binding Password}" ></Entry>
         <Label Text="Confirm Password" TextColor="White"></Label>
-        <Entry x:Name="ConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}" TextColor="White"></Entry>
+        <Entry x:Name="ConfirmPassword" IsPassword="True" Text="{Binding ConfirmPassword}"></Entry>
         <Button x:Name="SendButton" Text="Send" Command="{Binding SendCommand}"  VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="Gray" TextColor="White" Font="Bold" FontSize="26"></Button>
     </StackLayout>
     
