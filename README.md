@@ -1,2 +1,2 @@
 # EcoCasa
-Simple Xamarin tutorial app.
+Simple Xamarin Forms tutorial app.
